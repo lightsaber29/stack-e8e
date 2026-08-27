@@ -1,0 +1,33 @@
+# deps / build
+node_modules/
+dist/
+
+# python embedding service
+.venv/
+__pycache__/
+*.pyc
+
+# pgvector build checkout
+/pgvector/
+
+# secrets / local env
+.env
+.env.*
+
+# personal data (Privacy First: experience text never leaves this machine)
+obsidian-vault/Experiences/
+
+# agent/tool scratch
+.agents/
+.cache/
+.local/
+.npm/
+.trash/
+.claude/
+.claude.json
+.vibe-initialized
+
+# os / editor
+Thumbs.db
+.DS_Store
+*.log
