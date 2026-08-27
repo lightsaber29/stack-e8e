@@ -1,0 +1,30 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "backend": "node backend/server.mjs",
+    "eval:retrieval": "node eval/run-retrieval.mjs",
+    "privacy": "bash scripts/privacy-check.sh"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.232",
+    "express": "^4.22.2",
+    "pdf-parse": "^1.1.1",
+    "pg": "^8.23.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.4"
+  }
+}

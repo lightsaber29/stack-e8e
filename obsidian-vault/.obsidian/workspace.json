@@ -1,0 +1,221 @@
+{
+  "main": {
+    "id": "9d6be73d93af2a91",
+    "type": "split",
+    "children": [
+      {
+        "id": "ccb4dc1f11fb0bcf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "51827158dd63a992",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Experiences/계좌 조회 API 중복 노출 이슈 해결.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "계좌 조회 API 중복 노출 이슈 해결"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c50309472964f8d8",
+    "type": "split",
+    "children": [
+      {
+        "id": "d4dde81d157a78c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c62d23e525bcde89",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "380bf1fa0a281c05",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "5fe11843edac12a6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 294,
+    "collapsed": true
+  },
+  "right": {
+    "id": "68df100b326d4f2e",
+    "type": "split",
+    "children": [
+      {
+        "id": "0f8c23f5e77252bf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e0678fb53d1752e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Experiences/업무 주도 및 협업 - 개발 물량 초과 수행.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "백링크"
+            }
+          },
+          {
+            "id": "d0e42e64fefa9aad",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Experiences/업무 주도 및 협업 - 개발 물량 초과 수행.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "나가는 링크"
+            }
+          },
+          {
+            "id": "f53dd6dcbefe571f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "88712833f21ca42c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "44327f3982a6fa12",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Experiences/업무 주도 및 협업 - 개발 물량 초과 수행.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "개요"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
+    }
+  },
+  "active": "51827158dd63a992",
+  "lastOpenFiles": [
+    "Experiences/업무 주도 및 협업 - 개발 물량 초과 수행.md",
+    "Experiences/설계서 미비 및 테스트 병행 상황에서의 일정 조율.md",
+    "Experiences/대고객 디지털채널 고도화 프로젝트 - 백엔드-프론트엔드 개발.md",
+    "Experiences/고객 정보 보안 취약점 개선 - Vuex 상태 저장 구조 변경.md",
+    "Experiences/계좌 조회 API 중복 노출 이슈 해결.md",
+    "Experiences/Vue 컴포넌트 재생성 시 ref 접근 오류 해결.md",
+    "Experiences/타 부서와 협업한 물류 대시보드 구축.md",
+    "Experiences/사내 문서 위키 초기 세팅.md",
+    "Experiences/기술적으로 어려웠던 분산 트랜잭션 정합성 확보.md",
+    "Experiences/로그인 토큰 탈취 취약점 대응.md",
+    "Experiences/주문 목록 화면 기본 CRUD 개발.md",
+    "Experiences/대용량 배치 처리 메모리 문제 해결.md",
+    "Experiences/주도적으로 디자인 시스템 도입 제안 및 구축.md",
+    "Experiences/금융 오픈뱅킹 API 연동.md",
+    "Experiences/실패했던 실시간 이상거래 룰 엔진 시도.md",
+    "Experiences/상품 목록 무한스크롤 렌더링 성능 개선.md",
+    "Experiences/Ajax 오류 원인 분석 및 결함 개선.md",
+    "Experiences/중복 로그인 세션 문제 해결.md",
+    "Experiences/React 기반 심사 관리 화면 신규 개발.md",
+    "Experiences/정산 API 응답 속도 개선.md",
+    "Experiences/프론트엔드 팀 공통 컴포넌트 협업.md",
+    "Experiences/고객정보 브라우저 저장 방식 개선.md",
+    "Experiences/Web Speech API 도입으로 STT 실시간 처리 문제 해결 (스터디빗).md",
+    "Experiences/고객정보 브라우저 저장 구조 개선.md",
+    "Experiences/�������� ������ ���� ���� ����.md",
+    "Experiences/812386b5-3a1b-4dad-b33e-ed21cbfaa238.md"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "note": "검색 품질 평가 케이스. 코퍼스(경험 데이터)는 eval/seed-experiences.json 을 사용한다. 여기의 expected id 는 seed-experiences.json 의 id 를 참조한다. 코퍼스가 16건이므로 Top 5/Top 3 판정이 실제로 변별력을 가진다.",
+  "corpus": "seed-experiences.json",
+  "cases": [
+    {
+      "query": "문제를 해결한 경험",
+      "expectedAny": ["exp-001", "exp-003", "exp-005", "exp-006", "exp-011", "exp-013", "exp-014"]
+    },
+    {
+      "query": "보안 문제를 개선한 경험",
+      "expectedTop3": ["exp-001", "exp-013"]
+    },
+    {
+      "query": "협업하면서 진행했던 경험",
+      "expectedTop3": ["exp-002", "exp-016"]
+    },
+    {
+      "query": "성능을 개선한 경험",
+      "expectedTop3": ["exp-003", "exp-007", "exp-011"]
+    },
+    {
+      "query": "React를 사용했던 경험",
+      "expectedAny": ["exp-002", "exp-004", "exp-007", "exp-010", "exp-013", "exp-016"]
+    },
+    {
+      "query": "실패했던 경험",
+      "expectedTop3": ["exp-008"]
+    },
+    {
+      "query": "금융 프로젝트 경험",
+      "expectedAny": ["exp-004", "exp-009", "exp-013"]
+    },
+    {
+      "query": "주도적으로 개선한 경험",
+      "expectedTop3": ["exp-010"]
+    },
+    {
+      "query": "기술적으로 어려운 문제를 해결한 경험",
+      "expectedTop3": ["exp-014"]
+    },
+    {
+      "query": "성능 최적화로 응답 속도를 줄인 경험",
+      "expectedTop3": ["exp-003"]
+    }
+  ]
+}
