@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import ExperienceFields, { toApi, fromApi } from '../components/ExperienceFields.jsx'
 import TagList from '../components/TagList.jsx'
+import Markdown from '../components/Markdown.jsx'
 import { getExperience, updateExperience, deleteExperience } from '../api'
 
 const SECTIONS = [['situation', 'Situation'], ['problem', 'Problem'], ['action', 'Action'], ['result', 'Result']]
@@ -70,7 +71,7 @@ export default function ExperienceDetail() {
       {error && <p className="error">{error}</p>}
 
       {SECTIONS.map(([k, label]) => exp[k] && (
-        <section key={k}><h3>{label}</h3><p className="pre">{exp[k]}</p></section>
+        <section key={k}><h3>{label}</h3><Markdown>{exp[k]}</Markdown></section>
       ))}
 
       <div className="actions">
@@ -84,7 +85,7 @@ export default function ExperienceDetail() {
           <TagList tags={exp.metrics} />
         </div>
       )}
-      {exp.rawMemo && <section><h3>원본 메모</h3><p className="pre el-muted">{exp.rawMemo}</p></section>}
+      {exp.rawMemo && <section><h3>원본 메모</h3><Markdown className="el-muted">{exp.rawMemo}</Markdown></section>}
     </article>
   )
 }
