@@ -53,7 +53,7 @@ src/ (React + react-router, Vite root app)
         ↓ HTTP /api/*
 backend/server.mjs (Express, :8787)  — REST for experiences CRUD + /api/search + /api/chat
 backend/store.mjs                    — PostgreSQL + pgvector (`career_memory` DB, `experience` table, HNSW cosine index)
-backend/obsidian.mjs                 — additive markdown export to obsidian-vault/Experiences/<id>.md (does not replace Postgres as source of truth)
+backend/obsidian.mjs                 — additive markdown export to stack-e8e-vault/Experiences/<id>.md (does not replace Postgres as source of truth)
 backend/chat.mjs                     — conversational experience intake via @anthropic-ai/claude-agent-sdk (see Privacy First exception below)
 embedding/index.mjs                  — Node HTTP client for the local embedding service (EMBED_SERVICE_URL, default http://127.0.0.1:8788)
 embedding-py/service.py              — standalone Python service (Flask + sentence-transformers), BAAI/bge-m3, loopback-only

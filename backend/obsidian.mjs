@@ -9,7 +9,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const VAULT_DIR = process.env.OBSIDIAN_VAULT_DIR || join(__dirname, '..', 'obsidian-vault', 'Experiences')
+const VAULT_DIR = process.env.OBSIDIAN_VAULT_DIR || join(__dirname, '..', 'stack-e8e-vault', 'Experiences')
 
 const ID_LINE = /^id:\s*"([^"]*)"/m
 

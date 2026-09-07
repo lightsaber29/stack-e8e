@@ -66,7 +66,7 @@ BGE-M3 전환 직후 `eval/run-retrieval.mjs` 결과가 8/10 (기존 e5-small �
 
 ### Obsidian Vault 마크다운 노트 (신규, 부가 출력)
 
-경험 저장/수정 시 사람이 읽는 마크다운 노트를 `obsidian-vault/Experiences/<id>.md` 에도
+경험 저장/수정 시 사람이 읽는 마크다운 노트를 `stack-e8e-vault/Experiences/<id>.md` 에도
 생성한다 (`backend/obsidian.mjs`). 이는 **PostgreSQL 구조화 저장을 대체하지 않는 부가
 출력**이다 — 삭제 시 노트도 함께 삭제되고, 검색/CRUD의 근거는 여전히 PostgreSQL이다.
 

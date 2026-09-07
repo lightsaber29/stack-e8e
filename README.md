@@ -42,7 +42,7 @@ career-memory/
 ├─ backend/                Node/Express API (server.mjs, store.mjs, obsidian.mjs)
 ├─ embedding/              BGE-M3 임베딩 서비스용 Node HTTP 클라이언트 (index.mjs)
 ├─ embedding-py/           독립 Python 임베딩 서비스 (service.py, BAAI/bge-m3, 127.0.0.1 전용)
-└─ obsidian-vault/         경험 마크다운 노트 (부가 출력, Postgres를 대체하지 않음)
+└─ stack-e8e-vault/        경험 마크다운 노트 (부가 출력, Postgres를 대체하지 않음)
 ```
 
 > `backend/`, `embedding/`+`embedding-py/`, `src/`, DB는 `ARCHITECTURE.md`가 권장하는

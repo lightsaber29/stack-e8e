@@ -15,7 +15,11 @@ __pycache__/
 .env.*
 
 # personal data (Privacy First: experience text never leaves this machine)
-obsidian-vault/Experiences/
+# 볼트 전체를 무시한다 — 노트 본문/원본 소재/import 매핑 모두 개인 데이터
+stack-e8e-vault/
+
+# obsidian 로컬 설정 (workspace.json 등 머신마다 다름)
+.obsidian/
 
 # agent/tool scratch
 .agents/

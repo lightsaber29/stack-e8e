@@ -76,7 +76,7 @@ curl http://127.0.0.1:8787/api/health
 
 ## 주의
 
-- `obsidian-vault/Experiences/`와 DB 데이터는 gitignore라 **따라오지 않는다.**
+- `stack-e8e-vault/Experiences/`와 DB 데이터는 gitignore라 **따라오지 않는다.**
   기존 경험을 옮기려면 `pg_dump career_memory` → 새 PC에서 `psql` 복원
   (임베딩 컬럼도 함께 넘어가므로 재임베딩 불필요).
 - 초기 데이터가 필요하면 `eval/seed-experiences.json`을 `POST /api/experiences`로 밀어 넣는다.
