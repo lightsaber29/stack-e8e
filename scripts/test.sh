@@ -12,6 +12,10 @@ echo "=== Backend / Embedding syntax check ==="
 node --check backend/server.mjs
 node --check backend/store.mjs
 node --check backend/obsidian.mjs
+node --check backend/vault-sync.mjs
+node --check backend/sources.mjs
+node --check scripts/sync-vault.mjs
+node --check scripts/import-sources.mjs
 node --check embedding/index.mjs
 
 echo "=== Embedding service (Python) syntax check ==="

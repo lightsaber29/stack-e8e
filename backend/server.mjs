@@ -6,6 +6,8 @@ import * as store from './store.mjs'
 import { embed, embedExperience, EMBED_DIM, MODEL_NAME } from '../embedding/index.mjs'
 import { saveExperienceNote, deleteExperienceNote } from './obsidian.mjs'
 import { chatTurn, chatUpload, isUnavailable } from './chat.mjs'
+import { previewSync, applySync, exportMissingNotes } from './vault-sync.mjs'
+import { previewImport, applyImport } from './sources.mjs'
 import pdfParse from 'pdf-parse/lib/pdf-parse.js' // index.js에 있는 디버그 self-test가 ESM에서 항상 실행되는 버그를 피한다
 
 const app = express()
@@ -129,6 +131,43 @@ app.post('/api/chat/upload', ah(async (req, res) => {
     console.log(`[chat-upload] unavailable`)
     res.status(503).json({ error: 'Claude Code가 설치·로그인되어 있지 않습니다. 폼으로 직접 입력해 주세요.' })
   }
+}))
+
+// Obsidian 볼트(.md) → DB 동기화. 기본은 미리보기(계획)만 돌려주고,
+// apply:true 일 때만 실제로 insert/update/delete + 재임베딩을 수행한다 (backend/vault-sync.mjs).
+// 노트 제목/파일명/원문은 로그에 남기지 않는다 — 개수만.
+app.post('/api/vault/sync', ah(async (req, res) => {
+  const apply = req.body?.apply === true
+  const confirmDelete = req.body?.confirmDelete === true // 삭제는 별도 동의가 있어야 수행한다
+  const t0 = Date.now()
+  const out = apply ? await applySync({ confirmDelete }) : await previewSync()
+  const n = apply
+    ? `created=${out.created} updated=${out.updated} deleted=${out.deleted}`
+    : `creates=${out.creates.length} updates=${out.updates.length} deletes=${out.deletes.length}`
+  console.log(`[vault-sync] apply=${apply ? 1 : 0} ${n} errors=${out.errors.length} ${Date.now() - t0}ms`)
+  res.json(out)
+}))
+
+// 볼트에 노트가 없는 DB 경험을 마크다운으로 내보낸다 (삭제 대상을 만들지 않기 위한 출구).
+app.post('/api/vault/export', ah(async (_req, res) => {
+  const t0 = Date.now()
+  const out = await exportMissingNotes()
+  console.log(`[vault-export] exported=${out.exported} errors=${out.errors.length} ${Date.now() - t0}ms`)
+  res.json(out)
+}))
+
+// 소재 문서(Sources 폴더) → DB 가져오기. 원본 파일은 읽기만 하고 수정하지 않는다.
+// 기본은 미리보기, apply:true 일 때만 적재한다 (backend/sources.mjs).
+// 문서명/원문은 로그에 남기지 않는다 — 개수만.
+app.post('/api/vault/import', ah(async (req, res) => {
+  const apply = req.body?.apply === true
+  const t0 = Date.now()
+  const out = apply ? await applyImport() : await previewImport()
+  const n = apply
+    ? `imported=${out.imported} classified=${out.classified}`
+    : `creates=${out.creates.length} already=${out.already.length}`
+  console.log(`[vault-import] apply=${apply ? 1 : 0} ${n} errors=${out.errors.length} ${Date.now() - t0}ms`)
+  res.json(out)
 }))
 
 // 최종 에러 처리: 원문/vector 는 로그에 남기지 않고 에러 메시지만 기록, 프로세스는 죽지 않는다.

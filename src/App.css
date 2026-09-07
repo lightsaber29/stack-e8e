@@ -180,3 +180,14 @@ button:disabled { opacity: .6; cursor: default; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 @media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+/* 볼트 동기화 미리보기 */
+.sync-counts { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0 16px;
+  font-size: 13px; color: var(--el-muted, var(--muted)); }
+.sync-counts b { color: var(--el-text, var(--text)); font-size: 15px; margin-left: 4px; }
+.sync-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px;
+  font-size: 13px; line-height: 1.6; }
+.sync-actions { margin-top: 20px; }
+.editorial-page .modal-box .form-section + .form-section { margin-top: 12px; }
+.sync-confirm { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.sync-confirm input { width: 16px; height: 16px; }

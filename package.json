@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "backend": "node --env-file-if-exists=.env backend/server.mjs",
     "eval:retrieval": "node --env-file-if-exists=.env eval/run-retrieval.mjs",
+    "sync:vault": "node --env-file-if-exists=.env scripts/sync-vault.mjs",
+    "import:sources": "node --env-file-if-exists=.env scripts/import-sources.mjs",
     "privacy": "bash scripts/privacy-check.sh"
   },
   "dependencies": {

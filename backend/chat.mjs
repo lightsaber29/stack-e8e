@@ -18,6 +18,10 @@
 // chatTurn()에 existingExperience 를 넘기면 새 인터뷰가 아니라 기존 경험 수정 대화가 된다 —
 // 이때도 그 경험 자기 자신의 필드만 프롬프트에 들어간다 (다른 Experience/검색/임베딩은 여전히 대상 밖).
 //
+// classifyExperience()는 같은 예외 지점 안의 세 번째 진입점 — 이미 정리된 경험 하나를 받아
+// technologies/roles/keywords/metrics 같은 분류 필드만 뽑는다 (S/P/A/R 원문은 건드리지 않는다).
+// 조건 1~5 동일. 대상 경험 하나의 필드만 프롬프트에 들어가고, 다른 Experience/검색/임베딩은 대상 밖이다.
+//
 // chatUpload()는 같은 예외 지점 안에서 파일 업로드(md/pdf 원문)를 처리하는 두 번째 진입점이다.
 // 조건 1~5는 동일하게 적용된다 — 새 예외 파일이 아니라 이 파일 안의 별도 함수일 뿐.
 // 대화가 아니라 단발 추출이라 resume/session이 없고, 문서 하나에 경험이 여럿이면
@@ -178,6 +182,77 @@ export async function chatUpload(text) {
   }
 
   return { reply: reply.join('\n').trim(), drafts }
+}
+
+// 분류 전용 시스템 프롬프트. 원문을 다시 쓰지 않고 "본문에 실제로 있는 것"만 뽑게 한다.
+const SYSTEM_CLASSIFY = `당신은 이미 정리된 경력 기록에서 분류 정보만 뽑아내는 도구다.
+
+규칙:
+- 입력은 경험 하나의 제목과 Situation/Problem/Action/Result 본문이다. 되묻지 않는다 — 바로 도구를 호출한다.
+- **본문에 실제로 등장한 것만** 담는다. 추측·창작·일반화 금지. 근거가 없으면 그 필드는 비워 둔다.
+- technologies: 본문에 이름이 나온 기술·언어·프레임워크·서비스·도구만 (예: PostgreSQL, Next.js, k6).
+  코드 식별자·테이블/컬럼/함수명·설정 키(예: service_role, public.users, db-max-rows)는 기술이 아니다 — 넣지 않는다.
+  일반 명사("백엔드", "성능")도 기술이 아니다.
+- roles: 본문에서 본인이 맡은 역할이 드러날 때만 (예: 백엔드 개발, 성능 개선, 보안 점검).
+- keywords: 이 경험을 나중에 찾을 때 쓸 검색어 4~8개. 본문의 개념·주제를 쓰되 본문에 없는 개념을 만들지 않는다.
+- metrics: 숫자와 단위가 있는 측정값만 표기 그대로 (예: "LCP 14.4s → 2.95s (-80%)", "p95 5.58초", "취약점 5건 수정").
+  표의 행이나 항목 설명을 그대로 옮기지 않는다. 숫자가 없으면 비워 둔다.
+- company/project/period: 본문에 명시적으로 적혀 있을 때만 채운다. 없으면 비워 둔다 — 추측 금지.
+- 도구를 한 번만 호출하고 끝낸다. 설명은 한 줄 이내.`
+
+const classifyShape = {
+  technologies: z.array(z.string()).optional().describe('본문에 이름이 나온 기술만'),
+  roles: z.array(z.string()).optional(),
+  keywords: z.array(z.string()).optional().describe('검색용 키워드 4~8개'),
+  metrics: z.array(z.string()).optional().describe('본문에 적힌 정량 지표를 표기 그대로'),
+  company: z.string().optional().describe('본문에 명시된 경우만'),
+  project: z.string().optional().describe('본문에 명시된 경우만'),
+  period: z.string().optional().describe('본문에 명시된 경우만'),
+}
+
+// 경험 하나 → 분류 필드. 저장하지 않고 결과만 돌려준다 (병합은 호출한 쪽에서).
+// 실패하면 null 을 돌려주는 대신 throw 한다 — 호출하는 쪽이 isUnavailable 로 구분한다.
+export async function classifyExperience(exp) {
+  let out = null
+  const server = createSdkMcpServer({
+    name: 'career',
+    version: '1.0.0',
+    tools: [tool(
+      'classify_experience',
+      '경험의 분류 필드(기술/역할/키워드/지표)를 돌려준다.',
+      classifyShape,
+      async (args) => {
+        out = args
+        return { content: [{ type: 'text', text: '분류를 받았다.' }] }
+      },
+    )],
+  })
+
+  const body = [
+    `제목: ${exp.title || ''}`,
+    `Situation:\n${exp.situation || ''}`,
+    `Problem:\n${exp.problem || ''}`,
+    `Action:\n${exp.action || ''}`,
+    `Result:\n${exp.result || ''}`,
+  ].join('\n\n')
+
+  const it = query({
+    prompt: body,
+    options: {
+      systemPrompt: SYSTEM_CLASSIFY,
+      mcpServers: { career: server },
+      tools: [],
+      allowedTools: ['mcp__career__classify_experience'], // 이 호출에도 도구는 하나만
+      permissionMode: 'dontAsk',
+      settingSources: [],
+      maxTurns: 4,
+    },
+  })
+
+  for await (const m of it) {
+    if (m.type === 'result' && m.subtype !== 'success' && !out) throw new Error(`agent ${m.subtype}`)
+  }
+  return out
 }
 
 // CLI 미설치/미로그인 등 환경 문제인지 판별 (예외 조건 5번: 안내만 하고 나머지는 계속 동작).
