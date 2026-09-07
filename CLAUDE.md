@@ -23,6 +23,7 @@ The preview serves only from `0.0.0.0:5173` under base path `/preview/277-27izmp
 
     tc-dev
 
+- **`tc-dev` 는 프리뷰 환경에만 있다.** 로컬 개발 머신(예: 이 맥)에서는 명령이 없으므로 `npm run dev`(:5173)를 쓴다 — SETUP.md 참고.
 - Do not run `npm run dev` / `next dev` / `vite` directly on another port (e.g. 3000) or on `localhost` — the preview gateway will break with "Bad Gateway / ECONNRESET". Port is fixed at **5173**.
 - Vite is already set up correctly in this repo (`vite.config.js` sets `server: { host: '0.0.0.0', allowedHosts: true }` and computes `base` from `WORKSPACE_ID`). Don't remove these when editing the config.
 - Backend runs separately on `:8787` (`npm run backend`); Vite proxies `/api` (and `/preview/<wsid>/api`) to it — see `vite.config.js`.

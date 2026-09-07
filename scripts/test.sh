@@ -15,7 +15,16 @@ node --check backend/obsidian.mjs
 node --check embedding/index.mjs
 
 echo "=== Embedding service (Python) syntax check ==="
-./embedding-py/.venv/Scripts/python.exe -m py_compile embedding-py/service.py
+# venv 경로는 OS마다 다르다: Windows=Scripts/python.exe, mac/Linux=bin/python
+if [ -x ./embedding-py/.venv/Scripts/python.exe ]; then
+  PY=./embedding-py/.venv/Scripts/python.exe
+elif [ -x ./embedding-py/.venv/bin/python ]; then
+  PY=./embedding-py/.venv/bin/python
+else
+  echo "❌ embedding-py/.venv 를 찾을 수 없다 (SETUP.md 4번 참고)" >&2
+  exit 1
+fi
+"$PY" -m py_compile embedding-py/service.py
 
 echo "=== Frontend build (root Vite app) ==="
 npm run build

@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "backend": "node backend/server.mjs",
-    "eval:retrieval": "node eval/run-retrieval.mjs",
+    "backend": "node --env-file-if-exists=.env backend/server.mjs",
+    "eval:retrieval": "node --env-file-if-exists=.env eval/run-retrieval.mjs",
     "privacy": "bash scripts/privacy-check.sh"
   },
   "dependencies": {
